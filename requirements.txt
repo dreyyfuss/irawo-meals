@@ -1,0 +1,3 @@
+flask
+flask-security-too
+Flask-SQLAlchemy
