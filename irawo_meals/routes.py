@@ -66,6 +66,15 @@ def account():
     return render_template()
 
 
+@app.route("/meal_count")
+@login_required
+def meal_count():
+    """
+    Shows meal count for the day
+    """
+    return render_template()
+
+
 @app.route("/general_history", methods=["GET", "POST"])
 @login_required
 def general_history():
