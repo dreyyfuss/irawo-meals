@@ -2,8 +2,6 @@
 Assisting functions
 """
 
-import sqlite3
-
 from flask import redirect, session
 from functools import wraps
 

@@ -1,9 +1,12 @@
-from crypt import methods
+"""
+App routes for the irawo-meals webapp
+"""
+
 from flask import flash, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from irawo_meals import app
-from irawo_meals.helpers import login_required
+from irawo_meals.helpers import admin_required, login_required, management_required
 
 
 @app.after_request
@@ -13,15 +16,6 @@ def after_request(response):
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
-
-
-@app.route("/", methods=["GET", "POST"])
-@login_required
-def index():
-    """
-    Display form for meal ticking
-    """
-    return render_template()
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -43,6 +37,15 @@ def logout():
 
     # Redirect user to login page
     return redirect("/login")
+
+
+@app.route("/", methods=["GET", "POST"])
+@login_required
+def index():
+    """
+    Display form for meal ticking
+    """
+    return render_template()
 
 
 @app.route("/personal_history", methods=["GET", "POST"])
