@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Meal Ticking
+{% endblock %}
+
+{% block main %}
+    <div class="ticking_sheet">
+        <h2 class="text-center">
+            {{ week[0] | weekday }}  -  {{ week[6] | weekday }}
+        </h2>
+
+        <div class="table-responsive">
+            <form action="/index" method="POST">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">Day</th>
+                          <th scope="col">Breakfast</th>
+                          <th scope="col">Lunch</th>
+                          <th scope="col">Dinner</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        {% for day in week %}
+                            <tr>
+                                <td>{{ day | weekday}}</td>
+                                <td>
+                                    <select name="breakfast" id="breakfast-type">
+                                        <option selected value="none">None</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="packed">Packed</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="lunch" id="lunch-type">
+                                        <option selected value="none">None</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="late">Late</option>
+                                        {% if session["is_professional"] %}
+                                            <option value="packed">Packed</option>
+                                        {% endif %}
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="dinner" id="dinner-type">
+                                        <option selected value="none">None</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="late">Late</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{% endblock %}
