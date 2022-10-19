@@ -23,7 +23,12 @@ def login():
     """
     Log user in
     """
-    return render_template()
+    if request.method == "POST":
+        session["user_id"] = 1
+        return redirect("/")
+    
+    else:
+        return render_template("login.html")
 
 
 @app.route("/logout")
