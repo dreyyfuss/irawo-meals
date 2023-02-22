@@ -5,5 +5,22 @@
 {% endblock %}
 
 {% block main %}
-    Meal Count Here
+    <h1>
+        Meal Count
+    </h1>
+    <br>
+    <div class="container table-responsive text-left">
+        <table class="table table-bordered">
+            {% for meal in meals %}
+                <tr>
+                    <td>
+                        {{ meal }}
+                    </td>
+                    <td>
+                        {{ meals[meal] }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

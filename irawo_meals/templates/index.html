@@ -11,8 +11,8 @@
         </h3>
 
         <div class="table-responsive">
-            <form action="/index" method="POST">
-                <table class="table table-striped">
+            <form action="/" method="POST">
+                <table class="table table-striped mb-4">
                     <thead>
                         <tr>
                           <th scope="col">Day</th>
@@ -52,13 +52,11 @@
                                 </td>
                             </tr>
                         {% endfor %}
-                        <tr>
-                            <td>
-                                <button type="submit">Save</button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
+                <button type="submit" class="btn btn-dark btn-lg">
+                    Save
+                </button>
             </form>
         </div>
     </div>

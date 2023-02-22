@@ -5,5 +5,29 @@
 {% endblock %}
 
 {% block main %}
-    Manage Users Here
+    <div class="container table-responsive">
+        <form action="/users/manage" method="POST">
+            <table class="table table-striped">
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>
+                                {{ user }}
+                            </td>
+                            <td>
+                                <button name="reset" class="btn btn-warning">
+                                    Reset Password
+                                </button>
+                            </td>
+                            <td>
+                                <button name="delete_user" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
 {% endblock %}

@@ -2,11 +2,12 @@
 App routes for the irawo-meals webapp
 """
 
+from datetime import datetime, date, timedelta
 from flask import flash, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from irawo_meals import app
-from irawo_meals.helpers import admin_required, login_required, management_required
+from irawo_meals.helpers import admin_required, format_weekday, login_required, management_required
 
 
 @app.after_request
@@ -25,6 +26,9 @@ def login():
     """
     if request.method == "POST":
         session["user_id"] = 1
+        session["is_professional"] = True
+        session["is_admin"] = True
+        session["is_management"] = True
         return redirect("/")
     
     else:
@@ -50,7 +54,14 @@ def index():
     """
     Display form for meal ticking
     """
-    return render_template()
+    if request.method == "POST":
+        return redirect("/")
+
+    else:
+        current_date = date.today()
+        week = [current_date + timedelta(days=i) for i in range(1, 8)]
+
+        return render_template("index.html", week=week)
 
 
 @app.route("/personal_history", methods=["GET", "POST"])
@@ -59,16 +70,25 @@ def personal_history():
     """
     Display meal ticking history for user between selected dates
     """
-    return render_template()
+    if request.method == "POST":
+        return redirect("/personal_history")
+
+    else:
+
+        return render_template("personal_history.html")
 
 
 @app.route("/account")
 @login_required
 def account():
     """
-    Allows user to manage account (change password)
+    Allows user to manage account (change username & password)
     """
-    return render_template()
+    if request.method == "POST":
+        return redirect("/account")
+
+    else:
+        return render_template("account.html")
 
 
 @app.route("/meal_count")
@@ -77,7 +97,11 @@ def meal_count():
     """
     Shows meal count for the day
     """
-    return render_template()
+    if request.method == "POST":
+        return redirect("/meal_count")
+
+    else:
+        return render_template("meal_count.html")
 
 
 @app.route("/general_history", methods=["GET", "POST"])
@@ -86,7 +110,11 @@ def general_history():
     """
     Display ticking history for all active users between two dates
     """
-    return render_template()
+    if request.method == "POST":
+        return redirect("/general_history")
+
+    else:
+        return render_template("general_history.html")
 
 
 @app.route("/manage_users", methods=["GET", "POST"])
@@ -97,4 +125,8 @@ def manage_users():
     Delete users
     Reset user passwords
     """
-    return render_template()
+    if request.method == "POST":
+        return redirect("/manage_users")
+
+    else:
+        return render_template("manage_users.html")

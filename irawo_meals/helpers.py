@@ -2,6 +2,8 @@
 Assisting functions
 """
 
+import calendar
+from datetime import datetime, date
 from flask import redirect, session
 from functools import wraps
 
@@ -42,3 +44,12 @@ def management_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
+
+def format_weekday(date):
+    """Format value as USD."""
+    day = date.weekday()
+    yymmdd = str(date).split("-")
+    formatted = f"{calendar.day_name[day][:3]} ({yymmdd[2]}/{yymmdd[1]})"
+
+    return formatted
