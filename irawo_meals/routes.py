@@ -5,6 +5,7 @@ App routes for the irawo-meals webapp
 from datetime import datetime, date, timedelta
 from flask import flash, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
+import sqlite3
 
 from irawo_meals import app
 from irawo_meals.helpers import admin_required, format_weekday, login_required, management_required
@@ -74,8 +75,9 @@ def personal_history():
         return redirect("/personal_history")
 
     else:
-
-        return render_template("personal_history.html")
+        records = [{"Date":date.today(), "Lunch":"Late", "Dinner":"Normal", "Breakfast":"Packed"},
+                    {"Date":date.today(), "Lunch":"Late", "Dinner":"Normal", "Breakfast":"Packed"}]
+        return render_template("personal_history.html", records=records)
 
 
 @app.route("/account")
@@ -93,6 +95,7 @@ def account():
 
 @app.route("/meal_count")
 @login_required
+@management_required
 def meal_count():
     """
     Shows meal count for the day
@@ -101,11 +104,21 @@ def meal_count():
         return redirect("/meal_count")
 
     else:
-        return render_template("meal_count.html")
+        pb = 4
+        nb = 9
+        pl = 2
+        nl = 6
+        ll = 3
+        nd = 12
+        ld = 2
+        meals = {"Packed Breakfast":pb, "Normal Breakfast":nb, "Packed Lunch":pl,
+                "Normal Lunch":nl, "Late Lunch":ll, "Normal Dinner":nd, "Late Dinner":ld}
+        return render_template("meal_count.html", meals=meals)
 
 
 @app.route("/general_history", methods=["GET", "POST"])
 @login_required
+@management_required
 def general_history():
     """
     Display ticking history for all active users between two dates
@@ -117,11 +130,22 @@ def general_history():
         return render_template("general_history.html")
 
 
-@app.route("/manage_users", methods=["GET", "POST"])
+@app.route("/users", methods=["GET", "POST"])
 @login_required
+@admin_required
+def users():
+    """
+    Select between add users and manage users
+    """
+    if request.method == "GET":
+        return render_template("users.html")
+
+
+@app.route("/users/manage", methods=["GET", "POST"])
+@login_required
+@admin_required
 def manage_users():
     """
-    Add users
     Delete users
     Reset user passwords
     """
@@ -129,4 +153,18 @@ def manage_users():
         return redirect("/manage_users")
 
     else:
-        return render_template("manage_users.html")
+        users = ["Anthony Alikah", "Ibukun Afolami", "John Onyejegbu"]
+        return render_template("manage_users.html", users=users)
+
+@app.route("/users/add", methods=["GET", "POST"])
+@login_required
+@admin_required
+def add_users():
+    """
+    Add new users
+    """
+    if request.method == "POST":
+        return redirect("/users/manage")
+    
+    else:
+        return render_template("add_users.html")
