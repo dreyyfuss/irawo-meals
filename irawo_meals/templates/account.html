@@ -5,5 +5,35 @@
 {% endblock %}
 
 {% block main %}
-    Account Settings Here
+    <div class="container mb-4">
+        <h1>Manage Account</h1>
+    </div>
+    <br><br>
+    <div class="mb-4">
+        <h2>Change Username</h2>
+        <br>
+        <form action="/account/username" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" value="{{ current_username }}">
+            </div>
+            <button type="submit" class="btn-dark btn-lg">Change</button>
+        </form>
+    </div>
+    <br><br>
+    <div class="mb-4">
+        <h2>Change Password</h2>
+        <br>
+        <form action="/account/password" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="current_password" placeholder="Current Password" type="password">
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="new_password" placeholder="New Password" type="password">
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password">
+            </div>
+            <button type="submit" class="btn-dark btn-lg">Change</button>
+        </form>
+    </div>
 {% endblock %}

@@ -6,6 +6,9 @@
 
 {% block main %}
     <div class="ticking_sheet container">
+        <h1>
+            Welcome {{ username }}!
+        </h1>
         <h3 class="text-center mb-4">
             {{ week[0] | weekday }} - {{ week[6] | weekday }}
         </h3>
@@ -27,27 +30,27 @@
                             <tr>
                                 <td>{{ day | weekday}}</td>
                                 <td>
-                                    <select name="lunch" id="lunch-type">
-                                        <option selected value="none">None</option>
-                                        <option value="normal">Normal</option>
-                                        <option value="late">Late</option>
+                                    <select name="lunch{{ day }}" id="lunch-type">
+                                        <option {{ "selected='selected'" if meals[loop.index0]["lunch"] == "none" else ""}} value="none">None</option>
+                                        <option {{ "selected='selected'" if meals[loop.index0]["lunch"] == "normal" else ""}} value="normal">Normal</option>
+                                        <option {{ "selected='selected'" if meals[loop.index0]["lunch"] == "late" else ""}} value="late">Late</option>
                                         {% if session["is_professional"] %}
                                         <option value="packed">Packed</option>
                                         {% endif %}
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="dinner" id="dinner-type">
-                                        <option selected value="none">None</option>
-                                        <option value="normal">Normal</option>
-                                        <option value="late">Late</option>
+                                    <select name="dinner{{ day }}" id="dinner-type">
+                                        <option {{ "selected='selected'" if meals[loop.index0]["dinner"] == "none" else ""}} value="none">None</option>
+                                        <option {{ "selected='selected'" if meals[loop.index0]["dinner"] == "normal" else ""}} value="normal">Normal</option>
+                                        <option {{ "selected='selected'" if meals[loop.index0]["dinner"] == "late" else ""}} value="late">Late</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="breakfast" id="breakfast-type">
-                                        <option selected value="none">None</option>
-                                        <option value="normal">Normal</option>
-                                        <option value="packed">Packed</option>
+                                    <select name="breakfast{{ day }}" id="breakfast-type">
+                                        <option {{ "selected='selected'" if meals[loop.index0]["breakfast"] == "none" else ""}} value="none">None</option>
+                                        <option {{ "selected='selected'" if meals[loop.index0]["breakfast"] == "normal" else ""}} value="normal">Normal</option>
+                                        <option {{ "selected='selected'" if meals[loop.index0]["breakfast"] == "packed" else ""}} value="packed">Packed</option>
                                     </select>
                                 </td>
                             </tr>

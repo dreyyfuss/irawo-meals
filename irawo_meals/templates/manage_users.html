@@ -6,28 +6,40 @@
 
 {% block main %}
     <div class="container table-responsive">
-        <form action="/users/manage" method="POST">
-            <table class="table table-striped">
-                <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td>
-                                {{ user }}
-                            </td>
-                            <td>
-                                <button name="reset" class="btn btn-warning">
+        <table class="table table-striped">
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>
+                            {{ user["username"] }}
+                        </td>
+                        <td>
+                            <form action="/users/history" method="post">
+                                <input type="hidden" name="user_id" value="{{ user['id'] }}">
+                                <button type="submit" class="btn btn-dark">
+                                    History
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/users/reset" method="post">
+                                <input type="hidden" name="user_id" value="{{ user['id'] }}">
+                                <button type="submit" class="btn btn-warning">
                                     Reset Password
                                 </button>
-                            </td>
-                            <td>
-                                <button name="delete_user" class="btn btn-danger">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/users/delete" method="post">
+                                <input type="hidden" name="user_id" value="{{ user['id'] }}">
+                                <button type="submit" class="btn btn-danger">
                                     Delete
                                 </button>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </form>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

@@ -11,13 +11,13 @@
     <br>
     <div class="container table-responsive text-left">
         <table class="table table-bordered">
-            {% for meal in meals %}
+            {% for meal in meal_count %}
                 <tr>
                     <td>
                         {{ meal }}
                     </td>
                     <td>
-                        {{ meals[meal] }}
+                        {{ meal_count[meal] }}
                     </td>
                 </tr>
             {% endfor %}
