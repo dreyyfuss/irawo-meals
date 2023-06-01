@@ -40,6 +40,7 @@ INSERT INTO groups(group_name) VALUES ('admin');
 INSERT INTO groups(group_name) VALUES ('management');
 INSERT INTO groups(group_name) VALUES ('professional');
 INSERT INTO users(username, password)
+    -- Default Password: "meals@irawo"
     VALUES ('admin', 'pbkdf2:sha256:260000$8yoNWGJvozK8xBPN$210d3aa123f9fd5c1ac37cb07fc1f46f600de81ed852053dc7a8c3cb8e895550');
 INSERT INTO users_groups(user_id, group_id) VALUES (1, 1);
 

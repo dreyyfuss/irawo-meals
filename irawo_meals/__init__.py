@@ -4,13 +4,18 @@ Initialization file for the irawo_meals package
 
 from flask import Flask
 from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from irawo_meals.helpers import format_weekday
 
 
 # Configure application
 app = Flask(__name__)
+
+# Tell flask it is behind a proxy
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
 
 # Custom filter
 app.jinja_env.filters["weekday"] = format_weekday
