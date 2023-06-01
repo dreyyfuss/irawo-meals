@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Meal Count
+{% endblock %}
+
+{% block main %}
+    <h1>
+        Meal Count
+    </h1>
+    <br>
+    <div class="container table-responsive text-left">
+        <table class="table table-bordered">
+            {% for meal in meal_count %}
+                <tr>
+                    <td>
+                        {{ meal }}
+                    </td>
+                    <td>
+                        {{ meal_count[meal] }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -3,3 +3,7 @@ env/
 
 # Ignore all database files
 *.db
+
+# Ignore session related files and directories
+flask_session
+__pycache__

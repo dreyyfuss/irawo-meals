@@ -1,0 +1,46 @@
+DROP TABLE users_groups;
+DROP TABLE meals;
+DROP TABLE users;
+DROP TABLE groups;
+
+CREATE TABLE users(
+    id       INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username    TEXT  NOT NULL,
+    password    TEXT  NOT NULL
+);
+CREATE UNIQUE INDEX username ON users (username);
+
+CREATE TABLE meals(
+    id        INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    date         TEXT NOT NULL,
+    user_id   INTEGER NOT NULL,
+    breakfast    TEXT NOT NULL,
+    lunch        TEXT NOT NULL,
+    dinner       TEXT NOT NULL,
+    FOREIGN KEY (user_id)
+        REFERENCES users (id)
+);
+
+CREATE TABLE groups(
+    group_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    group_name  TEXT NOT NULL
+);
+
+CREATE TABLE users_groups(
+    id       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    user_id  INTEGER NOT NULL,
+    group_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id)
+        REFERENCES users (id),
+    FOREIGN KEY (group_id)
+        REFERENCES groups (group_id)
+);
+
+INSERT INTO groups(group_name) VALUES ('admin');
+INSERT INTO groups(group_name) VALUES ('management');
+INSERT INTO groups(group_name) VALUES ('professional');
+INSERT INTO users(username, password)
+    -- Default Password: "meals@irawo"
+    VALUES ('admin', 'pbkdf2:sha256:260000$8yoNWGJvozK8xBPN$210d3aa123f9fd5c1ac37cb07fc1f46f600de81ed852053dc7a8c3cb8e895550');
+INSERT INTO users_groups(user_id, group_id) VALUES (1, 1);
+
