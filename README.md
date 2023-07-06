@@ -133,18 +133,42 @@ at Irawo University Centre. They are:
 
 * ### **meal_count**
 
-    
+    This route gets the meal data for that day and displays it. Only users with 
+    management privilleges can access this route.
 
 * ### **general_history**
 
+    This route allows users with management privilleges to check the meal ticking
+    history of any user between two dates.
+
 * ### **users**
+
+    This route allows only users with admin privilleges to choose from two options, 
+    either to manage users or to check user history.
 
 * ### **manage_users**
 
+    This route allows users with admin privilleges to manage users. Here, the admin
+    user can delete any user account, reset their password or check the meal ticking
+    history of the user.
+
 * ### **user_history**
+
+    This route can only be accessed through a POST request and carries out the action
+    of displaying the meal ticking history of a particular user between two selected 
+    dates.
 
 * ### **reset_password**
 
+    This route can only be accessed through a POST request and carries out the action
+    of reseting the password of the selected user.
+
 * ### **delete_user**
 
+    This route can only be accessed through a POST request and carries out the action
+    of deleting the account of the selected user.
+
 * ### **add_user**
+
+    This route allows a user with admin privilleges to add a new user. Here, the
+    username and privilleges of the new user can be selected.
