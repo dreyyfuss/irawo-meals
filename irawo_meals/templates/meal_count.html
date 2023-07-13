@@ -9,18 +9,16 @@
         Meal Count
     </h1>
     <br>
-    <div class="container table-responsive text-left">
-        <table class="table table-bordered">
+    <div class="container">
+        <div class="row">
             {% for meal in meal_count %}
-                <tr>
-                    <td>
-                        {{ meal }}
-                    </td>
-                    <td>
-                        {{ meal_count[meal] }}
-                    </td>
-                </tr>
+                <div class="col-6 mb-3">
+                    {{ meal }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ meal_count[meal] }}
+                </div>
             {% endfor %}
-        </table>
+            </div>
     </div>
 {% endblock %}
