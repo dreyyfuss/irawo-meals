@@ -5,8 +5,34 @@ Initialization file for the irawo_meals package
 from flask import Flask
 from flask_session import Session
 from werkzeug.middleware.proxy_fix import ProxyFix
+import os
+import sqlite3
 
 from irawo_meals.helpers import format_weekday
+
+
+# Set up app database
+if not os.path.exists("irawo_meals/app.db"):
+    print("Setting up app database...")
+    
+    # Load text from createDB file
+    text = ""
+    with open("irawo_meals/createDB.txt") as create:
+        for line in create:
+            text += line
+    # Split text into indiviual commands
+    commands = text.split(";")
+
+    # Create new database connection
+    con = sqlite3.connect("irawo_meals/app.db")
+    with con:
+        db = con.cursor()
+        # Run each database command
+        for command in commands:
+            db.execute(command)
+
+else:
+    print("DB exists")
 
 
 # Configure application
